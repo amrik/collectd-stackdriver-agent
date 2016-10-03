@@ -47,7 +47,7 @@ backup=('etc/collectd.conf')
 prepare() {
         cd "${srcdir}/${pkgname}-${pkgver}"
 	sed 's/-Werror//g' -i *.ac */*.{am,in} */*/*.{am,in}
-	autoreconf
+	./build.sh
 }
 
 build() {
