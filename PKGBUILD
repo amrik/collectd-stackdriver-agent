@@ -39,13 +39,16 @@ makedepends=('curl' 'libdbi' 'libesmtp' 'libgcrypt' 'libmemcached'
 
 depends=('libltdl' 'iptables')
 
-source=('https://github.com/Stackdriver/collectd/archive/stackdriver-agent-5.5.2.zip')
-sha256sums=('7fdea24bdcb7e3c593b7ece002c7fb74db5bd7bd41bb20ef73ce5c23fbaf0298')
+source=("https://github.com/Stackdriver/collectd/archive/stackdriver-agent-5.5.2.zip"
+        'fix_stackdriver.patch')
+sha256sums=('7fdea24bdcb7e3c593b7ece002c7fb74db5bd7bd41bb20ef73ce5c23fbaf0298'
+            'ebc3762f1401a7fed291287c3682e46c836af752c8555c13be4269611fd638aa')
 
 backup=('etc/collectd.conf')
 
 prepare() {
         cd "${srcdir}/${pkgname}-${pkgver}"
+        patch -p0 < ../../fix_stackdriver.patch
 	sed 's/-Werror//g' -i *.ac */*.{am,in} */*/*.{am,in}
 	./build.sh
 }
