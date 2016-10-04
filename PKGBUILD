@@ -70,6 +70,6 @@ package() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
 	make DESTDIR="${pkgdir}" install
 	rmdir "${pkgdir}/var/run" # FS#30201
-	install -Dm644 ../service "${pkgdir}"/usr/lib/systemd/system/collectd.service
+	install -Dm644 ../../service "${pkgdir}"/usr/lib/systemd/system/collectd.service
 	install -Dm644 contrib/collectd2html.pl "${pkgdir}"/usr/share/collectd/collectd2html.pl
 }
